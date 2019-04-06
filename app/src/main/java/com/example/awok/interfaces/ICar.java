@@ -13,6 +13,7 @@ public interface ICar {
          void onDestroy();
          void onRefresh();
          void requestDataFromServer();
+         void updateCarsListOnTimerFinished();
          void updateScreenTimer();
          void onFlipGridList();
     }

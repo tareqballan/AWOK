@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements ICar.MainView {
             @Override
             public void onRefresh() {
                 presenter.onRefresh();
+                handler.removeCallbacks(runnable);
             }
         });
 
@@ -118,6 +119,7 @@ public class MainActivity extends AppCompatActivity implements ICar.MainView {
         adapter = new CarAdapter(cars,ticks);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+        Log.e("set data",ticks+"");
     }
 
     @Override
@@ -142,6 +144,7 @@ public class MainActivity extends AppCompatActivity implements ICar.MainView {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
         presenter.onDestroy();
     }
 
@@ -162,48 +165,65 @@ public class MainActivity extends AppCompatActivity implements ICar.MainView {
 
     @Override
     public void updateScreenTimer() {
-        if(handler == null){
+        if(handler!=null){
+            handler.removeCallbacks(runnable);
+        }
+        if(handler==null){
             handler = new Handler();
             runnable = new Runnable() {
                 @Override
                 public void run() {
-                    //presenter.updateScreenTimer();
+                    DateCalculator dateCalculator=new DateCalculator();
                     SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
                     long ticks_difference = prefs.getLong("ticks_difference", 0L);
 
-                    if(ticks_difference == 0L){
+                    if(ticks_difference == 0L ){ // First time
+                        long difference = dateCalculator.getDateDifference(adapter.getTicksValue());
+                        adapter.setTicks(dateCalculator.getDateDifference(difference)-1000L);
                         SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
-                        editor.putLong("ticks_difference", ticks_difference);
+                        editor.putLong("ticks_difference", difference-1000L);
                         editor.apply();
-
-
-
                         adapter.notifyDataSetChanged();
+                    }else if(ticks_difference <= 1000L){
 
-
-
-
-                    }else{
+                        presenter.updateCarsListOnTimerFinished();
+                        long difference = dateCalculator.getDateDifference(adapter.getTicksValue());
+                        SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                        editor.putLong("ticks_difference",difference);
+                        editor.apply();
+                        adapter.notifyDataSetChanged();
+                    } else{
+                        Log.e("ticks_difference",ticks_difference+"");
+                        adapter.setTicks(ticks_difference-1000L);
+                        SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                        editor.putLong("ticks_difference", ticks_difference-1000L);
+                        editor.apply();
                         adapter.notifyDataSetChanged();
                     }
                     handler.postDelayed(this, 1000);
-
                 }
             };
         }
-
-
         handler.post(runnable);
-//        adapter.setTicks(adapter.getTicksValue()-1000L);
-//        adapter.notifyDataSetChanged();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
     }
 
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        handler.removeCallbacks(runnable);
+    }
+
+    @Override
+    protected void onPostResume(){
+        super.onPostResume();
+        presenter.updateScreenTimer();
+    }
 
 
     @Override

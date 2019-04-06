@@ -1,13 +1,8 @@
 package com.example.awok.activity;
-import android.content.SharedPreferences;
-import android.os.Handler;
-
 import com.example.awok.interfaces.ICar;
 import com.example.awok.model.Car;
-
 import java.util.ArrayList;
 
-import static android.content.Context.MODE_PRIVATE;
 
 
 
@@ -48,6 +43,11 @@ public class CarPresenter implements ICar.presenter, ICar.GetCarsData.OnFinished
     }
 
     @Override
+    public void updateCarsListOnTimerFinished() {
+        getCarsData.getCarsArrayList(this);
+    }
+
+    @Override
     public void onFinished(ArrayList<Car> cars, long ticks) {
         if(mainView != null){
             mainView.setDataToRecyclerView(cars,ticks);
@@ -73,8 +73,7 @@ public class CarPresenter implements ICar.presenter, ICar.GetCarsData.OnFinished
 
     @Override
     public void updateScreenTimer() {
-        if (mainView != null){
+        if (mainView != null)
             mainView.updateScreenTimer();
-        }
     }
 }
