@@ -3,9 +3,6 @@ import com.example.awok.interfaces.ICar;
 import com.example.awok.model.Car;
 import java.util.ArrayList;
 
-
-
-
 /*This class is responsible to act as the middle man between View and Model.
 * It retrieves data from the Model and returns it formatted to the View and
  * it also decides what happens when you interact with the View.*/
@@ -18,7 +15,6 @@ public class CarPresenter implements ICar.presenter, ICar.GetCarsData.OnFinished
     public CarPresenter(ICar.MainView mainView, ICar.GetCarsData getCarsData) {
         this.mainView = mainView;
         this.getCarsData = getCarsData;
-
     }
 
     @Override

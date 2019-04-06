@@ -14,10 +14,6 @@ import com.example.awok.interfaces.ICar;
 import com.example.awok.model.Car;
 import com.google.android.material.button.MaterialButton;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -54,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements ICar.MainView {
         presenter = new CarPresenter(this,new GetCarsDataImp());
         presenter.requestDataFromServer();
 
-
         btn_grid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,7 +64,6 @@ public class MainActivity extends AppCompatActivity implements ICar.MainView {
                 handler.removeCallbacks(runnable);
             }
         });
-
 
     }
 
@@ -100,7 +94,6 @@ public class MainActivity extends AppCompatActivity implements ICar.MainView {
             recyclerView.setLayoutManager(layoutManager);
         }
 
-
     }
 
     private void setupSwipeRefreshLayout(){
@@ -119,7 +112,6 @@ public class MainActivity extends AppCompatActivity implements ICar.MainView {
         adapter = new CarAdapter(cars,ticks);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-        Log.e("set data",ticks+"");
     }
 
     @Override
@@ -144,7 +136,6 @@ public class MainActivity extends AppCompatActivity implements ICar.MainView {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
         presenter.onDestroy();
     }
 
@@ -212,7 +203,6 @@ public class MainActivity extends AppCompatActivity implements ICar.MainView {
         super.onStart();
     }
 
-
     @Override
     protected void onStop() {
         super.onStop();
@@ -224,7 +214,6 @@ public class MainActivity extends AppCompatActivity implements ICar.MainView {
         super.onPostResume();
         presenter.updateScreenTimer();
     }
-
 
     @Override
     public boolean onSupportNavigateUp() {

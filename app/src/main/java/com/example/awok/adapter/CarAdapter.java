@@ -1,5 +1,4 @@
 package com.example.awok.adapter;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -16,9 +15,6 @@ import com.example.awok.activity.DateCalculator;
 import com.example.awok.activity.MainActivity;
 import com.example.awok.model.Car;
 import com.squareup.picasso.Picasso;
-
-import java.sql.Timestamp;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -72,6 +68,7 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
         holder.txtLotValue.setText(dataList.get(position).getAuctionInfo().getLot());
         holder.txtBidsValue.setText(dataList.get(position).getAuctionInfo().getBids());
         holder.txtPrice.setText(dataList.get(position).getAuctionInfo().getCurrentPrice());
+
         /* Dealing with different languages */
        if(Locale.getDefault().getLanguage().equals(new Locale("en").getLanguage())){
            holder.txtCarModel.setText(dataList.get(position).getEnglishCardTitle());
@@ -108,8 +105,9 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
     public int getItemCount() {
         return dataList.size();
     }
+
     /* Get screen metrics */
-    public HashMap<String,Integer> getScreenMetrics(Context context){
+    private HashMap<String,Integer> getScreenMetrics(Context context){
 
         DisplayMetrics metrics = new DisplayMetrics();
         WindowManager windowManager = (WindowManager) context
@@ -126,6 +124,7 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
         result.put("height",height);
         return result;
     }
+
     /*
     * This function get the timer value and decides if the text will appear in Red or not.
     * */
@@ -163,7 +162,6 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
             if(diff<300000)
                 result.put("colored","1");
             Date d = new Date(diff);
-//            result.put("time",formatTime.format(d.getTime()));
             result.put("time",dateCalculator.getFormattedTime(diff));
             return result;
         }
