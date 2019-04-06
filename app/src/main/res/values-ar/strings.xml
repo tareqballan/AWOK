@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">سيارات وآليات</string>
+    <string name="car_image_description">سيارة</string>
+    <string name="car_model">موديل</string>
+    <string name="car_price">السعر</string>
+    <string name="car_currency">العملة</string>
+    <string name="txt_lot">لوت</string>
+    <string name="txt_bids">بيدز</string>
+    <string name="txt_time">الوقت المتبقي</string>
+    <string name="filter">تصفية</string>
+    <string name="sort">فرز</string>
+    <string name="grid">شبكة</string>
+    <string name="list">قائمة</string>
+    <string name="txt_pull_refresh">اسحب للتحديث</string>
+    <string name="please_wait">Please wait...</string>
+</resources>

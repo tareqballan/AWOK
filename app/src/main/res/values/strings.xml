@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Cars &amp; Machinery</string>
+    <string name="car_image_description">car</string>
+    <string name="car_model">car model</string>
+    <string name="car_price">car price</string>
+    <string name="car_currency">currency</string>
+    <string name="txt_lot">Lot #</string>
+    <string name="txt_bids">Bids</string>
+    <string name="txt_time">Time Left</string>
+    <string name="filter">Filter</string>
+    <string name="sort">Sort</string>
+    <string name="grid">Grid</string>
+    <string name="list">List</string>
+    <string name="txt_pull_refresh">Pull To Refresh</string>
+    <string name="please_wait">Please wait...</string>
+</resources>
